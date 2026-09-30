@@ -1,5 +1,7 @@
 # Informe del proyecto SnailPay
 
+Estado: borrador de entrega. La implementación está terminada dentro del alcance descrito; faltan la revisión integral en navegador, el tiempo invertido, la aportación personal y la confirmación del repositorio público. El PDF anterior ya no está en la carpeta de salida y debe volver a generarse; este Markdown conserva el contenido editable.
+
 ## Resumen
 
 La aplicación permite registrar una cuenta local, iniciar y cerrar sesión, consultar saldo y estadísticas simuladas, y realizar recargas ficticias mediante una API de Express. El trabajo conserva una estructura sencilla de rutas, componentes y servicios. La funcionalidad está implementada y cuenta con comprobaciones automatizadas; la revisión completa de interacción y presentación en navegador sigue pendiente.
@@ -58,4 +60,4 @@ Tiempo aproximado invertido: pendiente de completar por el autor. No se ha deduc
 
 Repositorio configurado: https://github.com/edgarlandal/Edgar-1964-API. No se verificó su visibilidad pública. Debe revisarse el nombre para ajustarlo al formato nombre y cuatro cifras, publicar los cambios y actualizar el enlace si se renombra.
 
-Antes de entregar, completar la aportación personal, confirmar el enlace público, ejecutar una revisión manual final y ajustar las declaraciones de funcionalidades si se detectan problemas. Este informe usa Arial de 10 puntos, no incorpora código ni capturas y tiene tres páginas.
+Antes de entregar, completar la aportación personal, confirmar el enlace público, ejecutar una revisión manual final y ajustar las declaraciones de funcionalidades si se detectan problemas. Generar nuevamente el PDF con Arial de 10 puntos, sin código ni capturas y con un máximo de cuatro páginas. La exportación anterior tenía tres páginas, pero no está presente en el espacio de trabajo actual.

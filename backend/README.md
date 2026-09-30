@@ -88,3 +88,12 @@ Si los formatos son correctos pero no coinciden con la tarjeta ficticia, la resp
 La API no tiene base de datos ni persistencia de cobros. El frontend ya conecta el formulario y el dashboard, envía id/correo del usuario y guarda el saldo solo ante una aprobación válida. También maneja errores de red y timeout. Consulta `frontend/README.md` para ejecutar y probar el flujo completo. La última recarga guarda tarjeta y CVV ficticios en LocalStorage; nunca usar datos reales.
 
 Las pruebas verifican aprobación, rechazo, caída simulada, validación y JSON inválido a través de HTTP. Se utilizó Codex para revisar y completar la API, documentar decisiones y crear las pruebas.
+
+## Estado de entrega
+
+- Implementado: aprobación, rechazo, caída explícita, validación por campo y respuestas uniformes.
+- Verificado automáticamente: 11 pruebas, incluyendo monto con dos decimales y servicio sin caída por defecto, además de TypeScript.
+- Pendiente de comprobación integral: interacción con el navegador ante errores de red y timeout.
+- Fuera del alcance del mock: cobros reales, autenticación de servidor y base de datos.
+
+Los errores de monto también incluyen `invalid_precision` y `amount_too_large`. Consulta la [checklist general](../REQUERIMIENTOS_Y_ESTADO.md) para los pendientes de publicación y documentación final.

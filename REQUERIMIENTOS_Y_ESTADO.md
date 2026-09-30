@@ -2,7 +2,7 @@
 
 Fecha de revisión: 29 de septiembre de 2026.
 
-Este documento reúne los requisitos de la aplicación, su implementación actual, las decisiones técnicas y el trabajo pendiente para entregar el proyecto. La funcionalidad principal está implementada en el código: acceso local, dashboard y recargas simuladas. Falta completar la revisión de la interfaz, actualizar algunos detalles y preparar la entrega final.
+Este documento reúne los requisitos de la aplicación y su estado actual. El acceso local, dashboard, recargas y ajustes de distribución están implementados. Los README y el informe Markdown existen. Falta validar el recorrido completo en navegador, completar los datos del autor, volver a generar el PDF y publicar la entrega.
 
 La revisión se basa en la especificación proporcionada y en el código de `frontend` y `backend`. La última comprobación ejecutó 11 pruebas del backend y 6 del frontend, todas correctas. TypeScript, lint del frontend y compilación de producción pasan. Sigue pendiente comprobar el recorrido completo y la presentación en navegador.
 
@@ -19,7 +19,7 @@ La aplicación no procesa pagos reales ni ejecuta carreras o apuestas. La autent
 - [x] TypeScript en frontend y backend.
 - [x] LocalStorage para usuario, sesión y saldo.
 
-Tecnologías adicionales presentes: TanStack Router y Start, Vite, Nitro, Tailwind CSS, shadcn con componentes basados en Base UI y las herramientas de pruebas de Node.js.
+Tecnologías adicionales presentes: TanStack Router y Start, Vite, Nitro, Tailwind CSS, shadcn con Base UI, Recharts y las herramientas de pruebas de Node.js.
 
 ## 2 Registro y sesión
 
@@ -39,7 +39,7 @@ Tecnologías adicionales presentes: TanStack Router y Start, Vite, Nitro, Tailwi
 
 La cuenta se guarda en `snailpay.account` y la sesión en `snailpay.session`. Esta solución sigue siendo una simulación local: el usuario puede modificar los datos de su navegador y no existe autenticación de servidor.
 
-### Pendientes de acceso
+### Estado del acceso
 
 - [x] Conectar `/register` al formulario real y enlazarlo desde el acceso.
 - [x] Distinguir la carga inicial de la sesión del estado sin sesión.
@@ -58,16 +58,16 @@ La cuenta se guarda en `snailpay.account` y la sesión en `snailpay.session`. Es
 | Permitir cargar saldo | Implementado | `PaymentForm.tsx` dentro del dashboard. |
 | Permitir cerrar sesión | Implementado | Acción disponible en el dashboard. |
 | Usar datos simulados congruentes | Implementado | Datos fijos, sin ejecución de apuestas ni carreras. |
-| Interfaz clara y utilizable | Parcial | Hay componentes y estilos, pero la captura revisada muestra problemas de espacio en pantallas estrechas. |
+| Interfaz clara y utilizable | Implementación lista para revisión visual | Se sustituyó la distribución anterior por una columna en pantallas pequeñas y dos desde el breakpoint lg. La captura anterior no representa esos ajustes. |
 
 Las barras utilizan Recharts y el contenedor de gráficos de shadcn; el donut utiliza CSS. Las seis victorias se distribuyen entre seis caracoles.
 
 ### Pendientes de presentación
 
 - [ ] Revisar el dashboard a anchos de móvil y escritorio con el código más reciente.
-- [ ] Evitar campos comprimidos, texto cortado y gráficos sin espacio suficiente.
-- [ ] Mantener separación consistente entre perfil, recarga y estadísticas.
-- [ ] Mejorar la identificación de títulos y las leyendas sin introducir un diseño complejo.
+- [x] Añadir columnas adaptables y permitir que tarjetas y gráficos ajusten su ancho.
+- [x] Añadir separación entre perfil, recarga y estadísticas.
+- [x] Mostrar nombres completos, valores de las barras y leyenda del donut.
 
 ## 4 Pasarela simulada SnailPay
 
@@ -81,7 +81,7 @@ SnailPay es una API de Express. El endpoint de recarga es `POST /api/snailpay/pa
 | `expiration_date` | Formato MM/AA y mes entre 01 y 12. |
 | `cvv` | Texto de tres dígitos. Solo datos ficticios. |
 | `cardholder_name` | Nombre no vacío ni compuesto únicamente por espacios. |
-| `transaction_amount` | Número finito mayor que cero. El frontend limita a dos decimales. |
+| `transaction_amount` | Número finito mayor que cero, hasta dos decimales en frontend y backend, dentro del rango seguro de centavos. |
 | `payer_id` | Identificador no vacío del usuario registrado. |
 | `payer_email` | Correo con formato válido del usuario registrado. |
 
@@ -127,7 +127,7 @@ Los tres resultados de negocio incluyen:
 - [x] Se muestran mensajes de aprobación y fallo.
 - [x] Se bloquea un segundo envío mientras hay una solicitud en curso.
 - [x] Se guardan el identificador, tarjeta y CVV ficticios de la última recarga aprobada.
-- [ ] Confirmar que conservar solo la última recarga aprobada es el alcance que se declarará; no existe historial de transacciones ni persistencia de intentos rechazados.
+- [x] Documentar el alcance de persistencia: solo se conserva la última recarga aprobada. No existe historial ni persistencia de intentos rechazados; no se declaran como implementados.
 
 ## 5 Organización del código
 
@@ -143,7 +143,7 @@ El frontend conserva una estructura pequeña: formularios de registro, acceso y 
 - [x] Actualizar el README del frontend con las rutas y componentes actuales.
 - [x] Documentar shadcn, Base UI y Recharts.
 - [x] Ejecutar la verificación de tipos y lint sobre la versión final.
-- [ ] Revisar dependencias instaladas que no se utilicen antes de entregar.
+- [x] Retirar dependencias directas sin uso: Material Tailwind, fuente Geist, paneles React y Router de TanStack y plugin Typography. Conservar el plugin de desarrollo de Vite y las utilidades declaradas en la configuración de shadcn.
 
 Estas mejoras no implican que se deba agregar una base de datos, autenticación real ni más capas de arquitectura.
 
@@ -195,7 +195,7 @@ Para ejecutar las pruebas, usar `npm test` en cada carpeta. Para compilar, usar 
 
 ## 8 Herramientas y proceso de trabajo
 
-La interfaz partió de una plantilla TanStack. Se adaptaron las pantallas al registro, acceso, dashboard y recarga. Se incorporaron Tailwind CSS y componentes shadcn para campos, tarjetas, etiquetas y botones. Las estadísticas se construyeron con CSS y elementos HTML, sin un motor de carreras.
+La interfaz partió de una plantilla TanStack. Se adaptaron las pantallas al registro, acceso, dashboard y recarga. Se incorporaron Tailwind CSS y componentes shadcn para campos, tarjetas, etiquetas y botones. Las estadísticas usan un donut CSS y barras Recharts, sin un motor de carreras.
 
 Codex se utilizó para analizar requisitos, completar la API, separar responsabilidades, integrar el frontend, apoyar las correcciones de estilos, preparar pruebas y documentación. El autor debe revisar y explicar el código y describir en la entrega qué partes adaptó personalmente.
 
@@ -205,7 +205,8 @@ Datos por completar antes de presentar la respuesta final:
 
 - [ ] Tiempo real aproximado invertido.
 - [ ] Descripción personal de las adaptaciones realizadas por el autor.
-- [ ] Resultado de la última ejecución de pruebas y revisión en navegador.
+- [x] Registrar resultados de pruebas automatizadas: 11 de backend y 6 de frontend.
+- [ ] Registrar el resultado de la revisión completa en navegador.
 - [ ] URL pública confirmada del repositorio.
 - [ ] URL del despliegue si se realiza la tarea opcional.
 
@@ -214,31 +215,31 @@ Datos por completar antes de presentar la respuesta final:
 | Entregable | Estado y acción necesaria |
 | --- | --- |
 | Código completo | Existe en el espacio de trabajo; guardar los cambios pendientes y publicarlos. |
-| Instrucciones de frontend y backend | Existen README; actualizar las referencias desfasadas. |
+| Instrucciones de frontend y backend | README actualizados con rutas, herramientas, comandos y limitaciones. |
 | Instrucciones de pruebas | Incluidas mediante `npm test` en ambos proyectos. |
 | Escenarios reproducibles de SnailPay | Documentados en los README y en este documento. |
 | Repositorio público | Pendiente de confirmar acceso público y enlace final. |
 | Nombre del repositorio | Ajustar al formato exacto nombre seguido de cuatro cifras; el nombre actual contiene el sufijo API. |
-| PDF de respuesta | Generado y revisado visualmente en `output/pdf/Informe_SnailPay.pdf`, con tres páginas y Arial 10. Su fuente editable es `INFORME_ENTREGA.md`. Completar tiempo invertido, aportación personal y confirmación del enlace antes de presentarlo. |
+| PDF de respuesta | Pendiente de volver a generar: `output/pdf/Informe_SnailPay.pdf` ya no está en el espacio de trabajo. Se conserva `INFORME_ENTREGA.md`. Hubo una exportación anterior revisada de tres páginas en Arial 10. |
 
 El código y el repositorio deben revisarse para evitar nombres, logotipos o referencias que identifiquen a la empresa evaluadora. El estado de Git revisado mostraba modificaciones y archivos sin seguimiento, incluido el frontend; es necesario incorporarlos a la entrega.
 
 ### Formato del PDF de respuesta
 
-- [ ] Fuente Arial de 10 puntos e interlineado estándar.
-- [ ] Máximo cuatro páginas para la entrega principal.
-- [ ] Sin código fuente, fragmentos de código ni capturas de la aplicación.
-- [ ] Resumen del proceso seguido.
-- [ ] Decisiones principales.
-- [ ] Herramientas, librerías y plantilla utilizadas.
-- [ ] Uso de IA y forma de validación.
-- [ ] Pruebas implementadas y motivo de su elección.
-- [ ] Funcionalidades terminadas.
-- [ ] Funcionalidades incompletas y problemas conocidos.
+- [ ] Volver a exportar con Arial de 10 puntos e interlineado estándar.
+- [ ] Verificar máximo cuatro páginas en la nueva exportación.
+- [x] Contenido preparado sin código fuente, fragmentos de código ni capturas.
+- [x] Resumen del proceso seguido.
+- [x] Decisiones principales.
+- [x] Herramientas, librerías y plantilla utilizadas.
+- [x] Uso de IA y forma de validación.
+- [x] Pruebas implementadas y motivo de su elección.
+- [x] Funcionalidades terminadas.
+- [x] Funcionalidades incompletas y problemas conocidos.
 - [ ] Tiempo aproximado invertido.
 - [ ] Liga al repositorio público.
 
-Se debe resumir este informe para elaborar el PDF final; no trasladarlo íntegro si supera el límite de páginas. No se deben declarar como terminados los puntos que continúan pendientes.
+La exportación anterior se revisó visualmente, pero el archivo ya no está presente. Completar la información personal y el enlace confirmado, generar el PDF desde el contenido Markdown y revisar la nueva exportación antes de enviarla.
 
 ## 10 Tareas opcionales y elementos fuera de alcance
 
@@ -266,12 +267,9 @@ No hace falta implementar recuperación de contraseña, verificación de correo,
 
 ## 11 Orden recomendado para terminar
 
-1. Resolver la ruta de registro y el estado inicial de sesión.
-2. Revisar el valor predeterminado de simulación y la coherencia de los montos.
-3. Corregir la distribución de la interfaz y comprobar móvil y escritorio.
-4. Ejecutar pruebas, tipos y comprobación completa del flujo de usuario.
-5. Actualizar README, herramientas utilizadas y problemas conocidos.
-6. Guardar y publicar los cambios con el nombre de repositorio requerido.
-7. Completar tiempo invertido y aportación personal y elaborar el PDF final.
+1. Revisar el flujo completo y la presentación en móvil y escritorio.
+2. Completar tiempo invertido y aportación personal en `INFORME_ENTREGA.md`.
+3. Confirmar el nombre y acceso público del repositorio y publicar los cambios.
+4. Actualizar el enlace de entrega y volver a exportar el PDF con los datos finales.
 
 La prioridad es entregar una aplicación utilizable y una descripción fiel a su estado real. Los extras opcionales deben realizarse después de cerrar el funcionamiento y la entrega principal.

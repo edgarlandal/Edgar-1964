@@ -22,6 +22,8 @@ Abre http://localhost:3000. El frontend envía las solicitudes /api al backend e
 
 ## Funcionalidades
 
+Implementadas en el código. La revisión integral de interacción y presentación en navegador sigue pendiente.
+
 - Registro de un usuario local, contraseña de al menos 8 caracteres y confirmación.
 - Inicio y cierre de sesión; recuperación de sesión y saldo al recargar.
 - Saldo inicial de $0, nombre y correo del usuario.
@@ -59,3 +61,12 @@ El monto admite hasta dos decimales tanto en frontend como en backend. Los recha
 El proxy apunta al backend local en 127.0.0.1:3001. Para publicar con el backend en otro servidor, hay que actualizar ese destino. Esta entrega no configura hosting.
 
 Se utilizó Codex para implementar el flujo, simplificar la plantilla y realizar las comprobaciones.
+
+## Estado de entrega
+
+- Implementado: rutas `/`, `/register` y `/dashboard`, carga inicial de sesión, formularios compartidos, gráficos y distribución adaptable.
+- Verificado automáticamente: 6 pruebas de frontend, TypeScript, lint y compilación.
+- Pendiente: comprobar en navegador el flujo completo, móvil, escritorio y timeout.
+- No implementado: despliegue público, autenticación de servidor e historial de recargas.
+
+La checklist general está en [REQUERIMIENTOS_Y_ESTADO.md](../REQUERIMIENTOS_Y_ESTADO.md). La limpieza retiró dependencias y CSS de la plantilla que no se utilizaban; se conservan los componentes y utilidades configurados por shadcn.
