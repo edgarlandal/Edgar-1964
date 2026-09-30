@@ -1,15 +1,6 @@
-import express from "express";
+import app from "./app.js";
 
-const app = express();
-const port = 3000;
-
-app.use(express.json());
-
-app.get("/", (_req, res) => {
-    res.json({message: "Working API"})
-});
-
+const port = Number(process.env.PORT ?? 3001);
 app.listen(port, () => {
-    console.log(`Server in http://localhost:${port}`)
+  console.log(`Server in http://localhost:${port}`);
 });
-
