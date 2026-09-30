@@ -101,7 +101,17 @@ export default function PaymentForm({
           signal: controller.signal,
         },
       )
-      const result = await response.json()
+      if (!response.headers.get('content-type')?.includes('application/json')) {
+        throw new Error(
+          `El servidor respondió HTTP ${response.status} sin JSON. Revisa API_URL y la ruta /api/snailpay/payments del backend. El saldo no cambió.`,
+        )
+      }
+      const result = await response.json().catch((error: unknown) => {
+        if (error instanceof SyntaxError) {
+          throw new Error('La API devolvió JSON inválido. El saldo no cambió.')
+        }
+        throw error
+      })
       if (
         !result ||
         typeof result.status_detail !== 'string' ||
@@ -114,6 +124,7 @@ export default function PaymentForm({
       const fieldErrors: Record<string, string> = {}
       for (const error of result.errors) {
         if (
+          error &&
           typeof error.field === 'string' &&
           typeof error.message === 'string'
         ) {
