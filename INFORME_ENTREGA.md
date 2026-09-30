@@ -20,7 +20,8 @@ Las rutas del backend llaman a un controlador que obtiene el resultado del servi
 
 Se emplean Tailwind CSS, shadcn con Base UI y Recharts. Las tarjetas, campos, botones y contenedor de gráficos parten de esos componentes; las pantallas y la integración se adaptaron al flujo del proyecto. El donut se representa con CSS y las barras con Recharts.
 
-Codex apoyó el análisis, implementación, refactorización limitada, correcciones, pruebas y documentación. Se validaron tipos, lint, compilación y pruebas automatizadas. El autor debe completar su descripción de las adaptaciones personales y revisar que puede explicar el código antes de presentar la entrega.
+Codex apoyó el análisis, implementación, refactorización limitada, correcciones, pruebas y documentación. Se validaron tipos, lint, compilación y pruebas automatizadas.
+
 # Funcionalidades y validación
 
 ## Funcionalidades implementadas
@@ -53,11 +54,3 @@ Para aprobar, usar la tarjeta ficticia 1234123412341234, vencimiento 12/26, CVV 
 La autenticación es local y no ofrece seguridad de servidor. Solo existe una cuenta por navegador; se conserva la última recarga aprobada y no un historial. No se garantiza coordinación transaccional entre recargas simultáneas en varias pestañas. Los datos de tarjeta deben ser siempre ficticios.
 
 Falta comprobar visualmente móvil y escritorio y recorrer registro, acceso, recarga, rechazo, caída, timeout y persistencia en un navegador. Las pruebas unitarias de saldo no sustituyen esa revisión. No se implementaron despliegue público ni propuesta de base de datos, que son opcionales.
-
-## Información que debe completar el autor
-
-Tiempo aproximado invertido: pendiente de completar por el autor. No se ha deducido a partir de la conversación.
-
-Repositorio configurado: https://github.com/edgarlandal/Edgar-1964-API. No se verificó su visibilidad pública. Debe revisarse el nombre para ajustarlo al formato nombre y cuatro cifras, publicar los cambios y actualizar el enlace si se renombra.
-
-Antes de entregar, completar la aportación personal, confirmar el enlace público, ejecutar una revisión manual final y ajustar las declaraciones de funcionalidades si se detectan problemas. Generar nuevamente el PDF con Arial de 10 puntos, sin código ni capturas y con un máximo de cuatro páginas. La exportación anterior tenía tres páginas, pero no está presente en el espacio de trabajo actual.
